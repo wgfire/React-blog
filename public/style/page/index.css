@@ -1,0 +1,24 @@
+.list-title {
+  font-size: 1.2rem;
+  color: #1e90ff;
+  padding: 0 0.5rem;
+}
+.list-context {
+  color: #777;
+  padding: 0.5rem 0.5rem 0 0.5rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+.list-icon {
+  padding: 0.5rem 0;
+  color: #aaa;
+}
+.list-icon span {
+  display: inline-block;
+  padding: 0 10px;
+}
+.ant-list-header div{
+-webkit-box-reflect: below -5px linear-gradient(transparent, transparent 20%, rgba(0, 0, 0, 0.7));
+}
