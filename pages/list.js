@@ -3,7 +3,7 @@ import React, { useState, Fragment } from "react";
 import { Row, Col, List } from "antd";
 import Header from "../components/header";
 import IconFont from "../components/icon";
-const List = () => {
+const wList = () => {
  
   return (
     <Fragment>
@@ -24,4 +24,4 @@ const List = () => {
   );
 };
 
-export default List;
+export default wList;

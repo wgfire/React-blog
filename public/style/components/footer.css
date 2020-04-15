@@ -1,0 +1,22 @@
+.footer-div {
+  text-align: center;
+  width: 100%;
+  padding: 1rem;
+  color: white;
+  font-size: 1rem;
+  background-image: -webkit-linear-gradient(left, #2d8cf0, #fff 25%, #2d8cf0 50%, #fff 75%, #2d8cf0);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-background-size: 200% 100%;
+  -webkit-animation: masked-animation 2s infinite linear;
+}
+
+@-webkit-keyframes masked-animation {
+  0% {
+      background-position: 0 0;
+  }
+
+  100% {
+      background-position: -100% 0;
+  }
+}

@@ -5,6 +5,8 @@ import Header from "../components/header";
 import '../public/style/page/index.css'
 import IconFont from "../components/icon";
 import Author from "../components/Author";
+import Hottopic from "../components/hotTopic";
+import Footer from '../components/Footer'
 const Home = () => {
   const [mylist, setMylist] = useState([
     {
@@ -13,8 +15,8 @@ const Home = () => {
       typeicon:"w-wenzi",
       typetxt:"文字教程",
       time:"2020-4-13",
-      readCount:2020
-
+      readCount:2020,
+      url:""// 全文链接
     },
   ]);
   return (
@@ -24,16 +26,16 @@ const Home = () => {
       </Head>
       <Header />
       <Row className="comm-main" type="flex" justify="center">
-        <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}>
+        <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14} xxl={16}>
           <List
             header={<div>最新日志</div>}
             itemLayout="vertical"
             dataSource={mylist}
             renderItem={item => (
-              <List.Item>
+              <List.Item >
                 <div className="list-title">{item.title}</div>
                 <Row className="list-icon"   >
-                  <Col>
+                  <Col >
                     <IconFont type="w-TIME" /> {item.time}
                   </Col>
                   <Col>
@@ -42,17 +44,24 @@ const Home = () => {
                   <Col>
                     <IconFont type="w-zongrenshu" /> {item.readCount+'人'}
                   </Col>
+                  
                 </Row>
                 <div className="list-context">{item.context}</div>
+                <div className="list-go">
+                <IconFont type="w-yueduquanwen" />
+                <a href={item.url}>查看全文</a>
+                </div>
               </List.Item>
             )}
           />
         </Col>
 
-        <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
+        <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4} xxl={4}>
           <Author></Author>
+          <Hottopic></Hottopic>
         </Col>
       </Row>
+      <Footer></Footer>
     </Fragment>
   );
 };
