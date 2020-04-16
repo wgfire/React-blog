@@ -8,25 +8,10 @@ import Footer from "../components/Footer";
 import MarkNav from "markdown-navbar";
 import "markdown-navbar/dist/navbar.css";
 import "../public/style/page/detailed.css";
-const Detailed = () => {
+import ajax from "../ajax";
+const Detailed = props => {
+  let markdown = props.article_content;
 
-  let markdown=
-  
-  `## Markdown-Navbar Demo
-  ## Chicken Chicken
-  Chicken Chicken Chicken Chicken Chicken.
-  
-  * Chicken Chicken Chicken Chicken Chicken.
-  * Chicken Chicken Chicken Chicken Chicken.
-  * Chicken Chicken Chicken Chicken Chicken.
-  
-  ### Chicken Chicken Chicken
-  
-  Chicken Chicken Chicken Chicken Chicken.
-  
-  #### Chicken Chicken Chicken Chicken
-  
-  Chicken Chicken Chicken Chicken Chicken Chicken.`;
   return (
     <>
       <Head>
@@ -71,7 +56,6 @@ const Detailed = () => {
         </Col>
 
         <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
-          
           <Affix offsetTop={5}>
             <div className="detailed-nav comm-box">
               <div className="nav-title">文章目录</div>
@@ -89,5 +73,15 @@ const Detailed = () => {
     </>
   );
 };
+Detailed.getInitialProps = async context => {
+  console.log(context.query.id);
+  let id = context.query.id;
+  const promise = new Promise(resolve => {
+    ajax("/front/getArticleById/" + id).then(res => {
+      resolve(res.data.data[0]);
+    });
+  });
 
+  return await promise;
+};
 export default Detailed;
