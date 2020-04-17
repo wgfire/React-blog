@@ -34,3 +34,11 @@ a {
   transition: color 0.3s;
   margin-left: 3px;
 }
+.detailed-title {
+  font-size: 1.8rem;
+  text-align: center;
+  padding: 1rem;
+}
+.center {
+  text-align: center;
+}

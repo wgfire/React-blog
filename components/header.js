@@ -1,21 +1,53 @@
 import React, { useState, useEffect } from "react";
 import "../public/style/components/header.css";
 import { Row, Menu, Col } from "antd";
+const { SubMenu } = Menu;
 import IconFont from "./icon";
+import ajax from "../ajax";
+import servicePath from "../config/apiUrl";
+import Router from "next/router";
 
-const Header = () => {
+const Header = result => {
   const [leftContent] = useState([
     { content: "阿港", className: "header-logo" },
     { content: "学不动了啊！😴", className: "header-txt" }
   ]);
-  const [rightContent] = useState([
-    { content: "首页", type: "w-shouye" },
-    { content: "分类", type: "w-fenlei" },
-    { content: "笔记", type: "w-icon-test" }
-  ]);
+
+  const [navArray, setNavArray] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await ajax(servicePath.getNavList).then(res => {
+        return res.data.data;
+      });
+      await ajax(servicePath.getTypeList).then(res => {
+        let result1 = res.data.data;
+        result.forEach(el => {
+          el.children = [];
+          result1.forEach(els => {
+            if (els.nav_id == el.ID) {
+              el.children.push(els);
+            }
+          });
+        });
+
+        setNavArray(result);
+        console.log("navArray", result);
+      });
+    };
+    fetchData();
+  }, []);
+  function handItemClick(props) {
+    console.log(props);
+    if (props.key === "1") {
+      Router.push("/index");
+    } else {
+      let key = props.key.split('-')
+      Router.push("/list?id=" +key[1]);
+    }
+  }
   return (
     <div className="header">
-      <Row  justify="center">
+      <Row justify="center">
         <Col xs={24} sm={24} md={10} lg={15} xl={12}>
           {leftContent.map((item, index) => {
             return (
@@ -27,13 +59,39 @@ const Header = () => {
         </Col>
         <Col className="memu-div" xs={0} sm={0} md={14} lg={8} xl={6}>
           <Menu mode="horizontal">
-            {rightContent.map((item, index) => {
-              return (
-                <Menu.Item key={item.type}>
-                  <IconFont type={item.type} />
-                  {item.content}{" "}
-                </Menu.Item>
-              );
+            {navArray.map((item, index) => {
+              if (item.children.length > 0) {
+                return (
+                  <SubMenu
+                    key={item.ID}
+                    title={
+                      <span>
+                        <IconFont type={item.nav_Icon} />
+                        {item.nav_Name}
+                      </span>
+                    }
+                  >
+                    {item.children.map(items => {
+                      return (
+                        <Menu.Item
+                          key={item.ID + "-" + items.ID}
+                          onClick={handItemClick}
+                        >
+                          <IconFont type={items.typeIcon} />
+                          {items.typeName}
+                        </Menu.Item>
+                      );
+                    })}
+                  </SubMenu>
+                );
+              } else {
+                return (
+                  <Menu.Item key={item.ID} onClick={handItemClick}>
+                    <IconFont type={item.nav_Icon} />
+                    {item.nav_Name}
+                  </Menu.Item>
+                );
+              }
             })}
           </Menu>
         </Col>

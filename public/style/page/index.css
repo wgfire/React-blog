@@ -14,7 +14,6 @@
 
 .list-icon span {
   display: inline-block;
-  padding: 0 10px;
 }
 .ant-list-header div {
   -webkit-box-reflect: below -5px linear-gradient(transparent, transparent 20%, rgba(0, 0, 0, 0.7));
@@ -23,4 +22,7 @@
   text-align: right;
   margin-right: 20px;
   color: #bbb;
+}
+.ant-col{
+  margin:0 5px;
 }
