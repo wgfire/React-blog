@@ -9,10 +9,10 @@ import Author from "../components/Author";
 import Hottopic from "../components/hotTopic";
 import Footer from "../components/Footer";
 import ajax from "../ajax";
-import  servicePath  from '../config/apiUrl'
-const Home = (list) => {
+import servicePath from "../config/apiUrl";
+const Home = list => {
   const [mylist, setMylist] = useState(list.data);
- 
+
   return (
     <Fragment>
       <Head>
@@ -27,7 +27,7 @@ const Home = (list) => {
           md={16}
           lg={18}
           xl={14}
-          xxl={16}
+         
         >
           <List
             header={<div>最新日志</div>}
@@ -35,7 +35,13 @@ const Home = (list) => {
             dataSource={mylist}
             renderItem={item => (
               <List.Item>
-                <div className="list-title">{item.title}</div>
+                <div className="list-title">
+                  <Link
+                    href={{ pathname: "/detailed", query: { id: item.id } }}
+                  >
+                    <a>{item.title}</a>
+                  </Link>
+                </div>
                 <Row className="list-icon">
                   <Col>
                     <IconFont type="w-TIME" /> {item.addTime}

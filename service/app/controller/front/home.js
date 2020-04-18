@@ -31,6 +31,7 @@ class HomeController extends Controller {
       "article.addTime as addTime," +
       "article.view_count as view_count ," +
       "type.typeName as typeName ," +
+      "type.typeIcon as typeIcon,"+
       "type.id as typeId " +
       "FROM article LEFT JOIN type ON article.type_id = type.ID " +
       "WHERE article.ID=" +

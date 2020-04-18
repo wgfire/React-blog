@@ -52,25 +52,24 @@ const Detailed = props => {
                 <Breadcrumb.Item>
                   <a href="/">首页</a>
                 </Breadcrumb.Item>
-                <Breadcrumb.Item>分类</Breadcrumb.Item>
                 <Breadcrumb.Item>文章详情</Breadcrumb.Item>
               </Breadcrumb>
             </div>
 
             <div>
               <div className="detailed-title">
-                React实战视频教程-技术胖Blog开发(更新08集)
+                {props.title}
               </div>
 
-              <div className="list-icon center">
+              <div className="dlist-icon center">
                 <span>
-                  <IconFont type="w-TIME" /> 2019-06-28
+                  <IconFont type="w-TIME" /> {props.addTime}
                 </span>
                 <span>
-                  <IconFont type="w-wenzi" /> 文字教程
+                  <IconFont type={props.typeIcon} /> {props.typeName}
                 </span>
                 <span>
-                  <IconFont type="w-zongrenshu" /> 5498人
+                  <IconFont type="w-zongrenshu" /> {props.view_count+'阅读'}
                 </span>
               </div>
 
@@ -120,27 +119,15 @@ Detailed.getInitialProps = async context => {
       ">> bbbbbbbbb\n" +
       ">>> cccccccccc\n" +
       "***\n\n\n" +
-      "# p03:Vue3.0基础知识讲解\n" +
-      "> aaaaaaaaa\n" +
-      ">> bbbbbbbbb\n" +
-      ">>> cccccccccc\n\n" +
-      "# p04:Vue3.0基础知识讲解\n" +
-      "> aaaaaaaaa\n" +
-      ">> bbbbbbbbb\n" +
-      ">>> cccccccccc\n\n" +
-      "#5 p05:Vue3.0基础知识讲解\n" +
-      "> aaaaaaaaa\n" +
-      ">> bbbbbbbbb\n" +
-      ">>> cccccccccc\n\n" +
-      "# p06:Vue3.0基础知识讲解\n" +
-      "> aaaaaaaaa\n" +
-      ">> bbbbbbbbb\n" +
-      ">>> cccccccccc\n\n" +
-      "# p07:Vue3.0基础知识讲解\n" +
-      "> aaaaaaaaa\n" +
-      ">> bbbbbbbbb\n" +
-      ">>> cccccccccc\n\n" +
-      "``` var a=11; ```";
+      "# P01:课程介绍和环境搭建\n" +
+      "[ **M** ] arkdown + E [ **ditor** ] = **Mditor**  \n" +
+      "> Mditor 是一个简洁、易于集成、方便扩展、期望舒服的编写 markdown 的编辑器，仅此而已... \n\n" +
+      "**这是加粗的文字**\n\n" +
+      "*这是倾斜的文字*`\n\n" +
+      "***这是斜体加粗的文字***\n\n" +
+      "~~这是加删除线的文字~~ \n\n" +
+      "`console.log(111) var a = 2` \n\n" +
+      "# p02:来个Hello World 初始Vue3.0\n" 
   });
 
   return await promise;
