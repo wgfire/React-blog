@@ -4,8 +4,8 @@ const Controller = require("egg").Controller;
 
 class MainController extends Controller {
   async checkLogin() {
-    let userName = this.ctx.request.body.userName;
-    let password = this.ctx.request.body.password;
+    let userName = this.ctx.params.userName;
+    let password = this.ctx.params.password;
     const sql =` SELECT userName FROM admin_user WHERE userName = ${userName} AND password = ${password}`
 
     const res = await this.app.mysql.query(sql);
