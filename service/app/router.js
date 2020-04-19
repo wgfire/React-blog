@@ -6,5 +6,5 @@
 module.exports = app => {
  
 require('./router/front/home')(app)
-  
+require('./router/admin/admin')(app) 
 };

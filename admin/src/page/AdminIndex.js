@@ -7,7 +7,8 @@ import {
   DiffFilled,
   GitlabFilled
 } from "@ant-design/icons";
-
+import { Route } from "react-router-dom";
+import AddArticle from "./AddArticle";
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -21,8 +22,8 @@ function AdminIndex() {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-        <div className="logo" >
-            <img src="/logo.png"></img>
+        <div className="logo">
+          <img src="/logo.png"></img>
         </div>
         <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
           <Menu.Item key="1">
@@ -60,10 +61,12 @@ function AdminIndex() {
             <Breadcrumb.Item>工作台</Breadcrumb.Item>
           </Breadcrumb>
           <div style={{ padding: 24, background: "#fff", minHeight: 360 }}>
-            博客工作台.
+            <div>
+              <Route path="/index/" exact component={AddArticle} />
+            </div>
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>JSPang.com</Footer>
+        <Footer style={{ textAlign: "center" }}>阿港后台管理系统</Footer>
       </Layout>
     </Layout>
   );

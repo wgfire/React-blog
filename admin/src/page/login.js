@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Card, Input, Button, Spin } from "antd";
+import { Card, Input, Button, Spin ,message } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import { Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import "../static/style/login.css";
-const Login = () => {
+import "../ajax";
+import ajax from "../ajax";
+const Login = (props) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -68,12 +70,40 @@ const Login = () => {
       document.addEventListener(event, e => doit(), false);
     });
   }, []);
-  const checkLogin = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-  };
+  const checkLogin = ()=>{
+    setIsLoading(true)
+
+    if(!userName){
+        message.error('用户名不能为空')
+        setIsLoading(false)
+        return false
+    }else if(!password){
+        message.error('密码不能为空')
+        setIsLoading(false)
+        return false
+    }
+    let dataProps = {
+        'userName':userName,
+        'password':password
+    }
+    ajax.get('/checkLogin',{
+      params: dataProps
+    }).then(
+       res=>{
+            setIsLoading(false)
+            if(res.data.data=='登录成功'){
+                localStorage.setItem('openId',res.data.openId)
+                props.history.push('/index')
+            }else{
+                message.error('用户名或者密码错误！')
+            }
+       }
+    )
+
+    setTimeout(()=>{
+        setIsLoading(false)
+    },1000)
+}
   return (
     <div className="main">
       <canvas className="canvas"></canvas>
@@ -106,7 +136,8 @@ const Login = () => {
             <br />
             <br />
             <Button type="primary" size="large" block onClick={checkLogin}>
-            <Link to={'/index'}>Login</Link>
+              {/* <Link to={"/index"}>Login</Link> */}
+              Login in
             </Button>
           </Card>
         </Spin>
