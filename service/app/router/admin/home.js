@@ -1,5 +1,12 @@
-module.exports = app =>{
-    const {router,controller} = app
-    router.get('/admin/checkLogin',controller.admin.main.checkLogin)
-}
-
+module.exports = app => {
+  const { router, controller } = app;
+  var adminauth = app.middleware.adminauth();
+  router.get(
+    "/admin/getTypeInfo",
+    adminauth,
+    controller.admin.main.getTypeInfo
+  );
+  router.post("/admin/addArticle", adminauth, controller.admin.main.addArticle);
+  router.post("/admin/updateArticle", adminauth, controller.admin.main.updateArticle);
+  router.post("/admin/checkLogin", controller.admin.main.checkLogin);
+};

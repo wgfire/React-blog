@@ -86,8 +86,8 @@ const Login = (props) => {
         'userName':userName,
         'password':password
     }
-    ajax.get('/checkLogin',{
-      params: dataProps
+    ajax.post('/checkLogin',dataProps,{
+      withCredentials:true 
     }).then(
        res=>{
             setIsLoading(false)

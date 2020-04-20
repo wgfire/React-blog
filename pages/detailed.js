@@ -104,31 +104,7 @@ Detailed.getInitialProps = async context => {
       resolve(res.data.data[0]);
     });
   });
-  promise.then(res => {
-    res.article_content =
-      "# P01:课程介绍和环境搭建\n" +
-      "[ **M** ] arkdown + E [ **ditor** ] = **Mditor**  \n" +
-      "> Mditor 是一个简洁、易于集成、方便扩展、期望舒服的编写 markdown 的编辑器，仅此而已... \n\n" +
-      "**这是加粗的文字**\n\n" +
-      "*这是倾斜的文字*`\n\n" +
-      "***这是斜体加粗的文字***\n\n" +
-      "~~这是加删除线的文字~~ \n\n" +
-      "`console.log(111) var a = 2` \n\n" +
-      "# p02:来个Hello World 初始Vue3.0\n" +
-      "> aaaaaaaaa\n" +
-      ">> bbbbbbbbb\n" +
-      ">>> cccccccccc\n" +
-      "***\n\n\n" +
-      "# P01:课程介绍和环境搭建\n" +
-      "[ **M** ] arkdown + E [ **ditor** ] = **Mditor**  \n" +
-      "> Mditor 是一个简洁、易于集成、方便扩展、期望舒服的编写 markdown 的编辑器，仅此而已... \n\n" +
-      "**这是加粗的文字**\n\n" +
-      "*这是倾斜的文字*`\n\n" +
-      "***这是斜体加粗的文字***\n\n" +
-      "~~这是加删除线的文字~~ \n\n" +
-      "`console.log(111) var a = 2` \n\n" +
-      "# p02:来个Hello World 初始Vue3.0\n" 
-  });
+
 
   return await promise;
 };
