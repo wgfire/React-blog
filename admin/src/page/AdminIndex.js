@@ -1,22 +1,32 @@
 import React, { useState } from "react";
 import { Layout, Menu, Breadcrumb } from "antd";
 import "../static/style/AdminIndex.css";
+import ArticleList from "./ArticleList";
+import AddArticle from "./AddArticle";
 import {
   AppstoreOutlined,
   PlusCircleFilled,
   DiffFilled,
   GitlabFilled
 } from "@ant-design/icons";
-import { Route } from "react-router-dom";
-import AddArticle from "./AddArticle";
+import { Route, Switch } from "react-router-dom";
+
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
-function AdminIndex() {
+function AdminIndex(props) {
   const [collapsed, setCollapsed] = useState(false);
 
   const onCollapse = collapsed => {
     setCollapsed(collapsed);
+  };
+  const handleClickArticle = e => {
+    console.log(e.item.props, e);
+    if (e.key == "addArticle") {
+      props.history.push("/index/add");
+    } else {
+      props.history.push("/index/list");
+    }
   };
 
   return (
@@ -30,12 +40,10 @@ function AdminIndex() {
             <AppstoreOutlined />
             <span>工作台</span>
           </Menu.Item>
-          <Menu.Item key="2">
-            <PlusCircleFilled />
-            <span>添加文章</span>
-          </Menu.Item>
+
           <SubMenu
             key="sub1"
+            onClick={handleClickArticle}
             title={
               <span>
                 <DiffFilled />
@@ -43,8 +51,8 @@ function AdminIndex() {
               </span>
             }
           >
-            <Menu.Item key="3">添加文章</Menu.Item>
-            <Menu.Item key="4">文章列表</Menu.Item>
+            <Menu.Item key="addArticle">添加文章</Menu.Item>
+            <Menu.Item key="articleList">文章列表</Menu.Item>
           </SubMenu>
 
           <Menu.Item key="9">
@@ -58,11 +66,16 @@ function AdminIndex() {
         <Content style={{ margin: "0 16px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
             <Breadcrumb.Item>后台管理</Breadcrumb.Item>
-            <Breadcrumb.Item>工作台</Breadcrumb.Item>
+         
           </Breadcrumb>
           <div style={{ padding: 24, background: "#fff", minHeight: 360 }}>
             <div>
-              <Route path="/index/" exact component={AddArticle} />
+              <Switch>
+                <Route path="/index/" exact component={AddArticle} />
+                <Route path="/index/add/" exact component={AddArticle} />
+                <Route path="/index/add/:id" exact component={AddArticle} />
+                <Route path="/index/list/"  exact  component={ArticleList} />
+              </Switch>
             </div>
           </div>
         </Content>
