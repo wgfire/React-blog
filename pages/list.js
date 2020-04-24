@@ -106,11 +106,7 @@ wList.getInitialProps = async context => {
   let id = context.query.id;
   const promise = new Promise(resolve => {
     ajax(servicePath.getArticBylistId + id).then(res => {
-      res.data.data = res.data.data.concat(
-        res.data.data,
-        res.data.data,
-        res.data.data
-      );
+    
       resolve(res.data);
     });
   });

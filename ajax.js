@@ -1,9 +1,11 @@
 import axios from 'axios'
-
+ const  http =process.env.NODE_ENV=='production'?'http://112.74.102.85:7001':'http://127.0.0.1:7001'
+ 
  let ajax = axios.create({
-    baseURL: 'http://127.0.0.1:7001/front/',
+    baseURL: http+'/front/',
     timeout: 1000,
 
   });
-
+ console.log('环境地址',http);
+ 
   export default ajax
