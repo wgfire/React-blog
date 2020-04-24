@@ -16,10 +16,24 @@
   margin-right: 0.5rem;
   cursor: pointer;
 }
-.ant-modal-body{
-    display: flex;
-    justify-content: center;
+.ant-modal-body {
+  display: flex;
+  justify-content: center;
 }
-.ant-tag{
-    margin-bottom: 3px;
+.ant-tag {
+  margin-bottom: 3px;
+}
+.rote {
+  /* animation: deg 6s linear infinite; */
+  cursor: pointer;
+}
+
+@keyframes deg {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

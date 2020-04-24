@@ -14,7 +14,7 @@ const Author = () => {
   return (
     <div className="author-div comm-box">
       <div>
-        <Avatar size={100} src="/header.jpg" />
+        <Avatar size={100} src="/header.jpg" className="rote" />
       </div>
       <div className="author-introduction">
         从前有一位有着婴儿肥的程序员去入职，直到上班的时候才知道，公司研发部都走光了，他垂头丧气，看着前辈們留下来的祖传代码，散发这令人作呕的清香，他后悔了！他不该选蔡文姬，如果能重来，应该选李白。集合，准备团战！

@@ -56,6 +56,14 @@ class HomeController extends Controller {
       data: results
     };
   }
+  async getMusicList() { // 获取歌曲列表
+    
+    let sql = `SELECT * FROM music`;
+    const results = await this.app.mysql.query(sql);
+    this.ctx.body = {
+      data: results
+    };
+  }
   async getArticBylistId() { // 
     let id = this.ctx.params.id;
     let sql = `SELECT * FROM article WHERE article.type_id=${id}`;

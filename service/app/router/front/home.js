@@ -4,6 +4,7 @@ module.exports = app => {
     router.get('/front/getArticleById/:id', controller.front.home.getArticleById);
     router.get('/front/getNavList', controller.front.home.getNavList);
     router.get('/front/getTypeList', controller.front.home.getTypeList);
+    router.get('/front/getMusicList', controller.front.home.getMusicList);
     router.get('/front/getArticBylistId/:id', controller.front.home.getArticBylistId);
   
   };
