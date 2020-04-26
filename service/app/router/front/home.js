@@ -6,6 +6,7 @@ module.exports = app => {
     router.get('/front/getTypeList', controller.front.home.getTypeList);
     router.get('/front/getMusicList', controller.front.home.getMusicList);
     router.get('/front/getArticBylistId/:id', controller.front.home.getArticBylistId);
+    router.get('/front/addViewcount/:id', controller.front.home.addViewcount);
   
   };
   

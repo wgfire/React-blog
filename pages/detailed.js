@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { Row, Col, Breadcrumb, Affix } from "antd";
 import IconFont from "../components/icon";
@@ -13,7 +13,7 @@ import Tocify from "../components/topif.tsx";
 import "markdown-navbar/dist/navbar.css";
 import "../public/style/page/detailed.css";
 import ajax from "../ajax";
-import  servicePath  from '../config/apiUrl'
+import servicePath from "../config/apiUrl";
 const Detailed = props => {
   //let markdown = props.article_content;
   const renderer = new marked.Renderer();
@@ -57,9 +57,7 @@ const Detailed = props => {
             </div>
 
             <div>
-              <div className="detailed-title">
-                {props.title}
-              </div>
+              <div className="detailed-title">{props.title}</div>
 
               <div className="dlist-icon center">
                 <span>
@@ -69,7 +67,7 @@ const Detailed = props => {
                   <IconFont type={props.typeIcon} /> {props.typeName}
                 </span>
                 <span>
-                  <IconFont type="w-zongrenshu" /> {props.view_count+'阅读'}
+                  <IconFont type="w-zongrenshu" /> {props.view_count + "阅读"}
                 </span>
               </div>
 
@@ -99,12 +97,12 @@ const Detailed = props => {
 Detailed.getInitialProps = async context => {
   console.log(context.query.id);
   let id = context.query.id;
+  let resutl = await ajax.get(servicePath.addViewcount + id);
   const promise = new Promise(resolve => {
     ajax(servicePath.getArticleById + id).then(res => {
       resolve(res.data.data[0]);
     });
   });
-
 
   return await promise;
 };

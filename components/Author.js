@@ -17,7 +17,7 @@ const Author = () => {
         <Avatar size={100} src="/header.jpg" className="rote" />
       </div>
       <div className="author-introduction">
-        从前有一位有着婴儿肥的程序员去入职，直到上班的时候才知道，公司研发部都走光了，他垂头丧气，看着前辈們留下来的祖传代码，散发这令人作呕的清香，他后悔了！他不该选蔡文姬，如果能重来，应该选李白。集合，准备团战！
+        本人主玩李白，有什么ID能让对面看见直接投降的那种？
         <Divider>社交账号</Divider>
         <a href="https://github.com/wgfire">
           <Avatar size={28} icon={<GithubOutlined />} className="account" />
@@ -32,7 +32,7 @@ const Author = () => {
       </div>
       <div className="author-btn">
         <Tag color="red">国漫燃</Tag>
-        <Tag color="volcano">荣耀王者</Tag>
+        <Tag color="volcano">目标保时捷</Tag>
         <Tag color="orange">小龙虾</Tag>
         <Tag color="gold">以幽默的方式过一生</Tag>
         <Tag color="blue">宅男</Tag>

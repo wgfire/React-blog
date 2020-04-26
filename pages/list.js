@@ -14,6 +14,7 @@ const wList = data => {
   const [mylist, setMylist] = useState(data.data);
   const [typeName, setTypeName] = useState("");
   const [typeList, setTypeList] = useState([]);
+  const [artic, setArtic] = useState([]);
   const [color] = useState([
     "red",
     "volcano",
@@ -26,13 +27,18 @@ const wList = data => {
   ]);
 
   useEffect(() => {
-    let url = new URLSearchParams(window.location.search);
-    var typeName = url.get("typeName");
-    setTypeName(typeName);
-    if (typeList.length == 0) {
-      setTypeList(JSON.parse(sessionStorage.getItem("typeList")));
-    }
-    setMylist(data.data);
+    
+      // You can await here
+      let url = new URLSearchParams(window.location.search);
+      var typeName = url.get("typeName");
+      setTypeName(typeName);
+      if (typeList.length == 0) {
+        setTypeList(JSON.parse(sessionStorage.getItem("typeList")));
+      }
+      
+      // ...
+    setMylist(data.data)
+    
   });
   function getColor() {
     let index = Math.floor(Math.random() * color.length);
@@ -94,7 +100,7 @@ const wList = data => {
               );
             })}
           </div>
-          <HotTopic />
+          <HotTopic articList={artic} />
         </Col>
       </Row>
       <Footer></Footer>
@@ -106,7 +112,6 @@ wList.getInitialProps = async context => {
   let id = context.query.id;
   const promise = new Promise(resolve => {
     ajax(servicePath.getArticBylistId + id).then(res => {
-    
       resolve(res.data);
     });
   });
