@@ -2,22 +2,20 @@
 import { List, Typography, Divider } from "antd";
 import React, { useState, useEffect } from "react";
 import "../public/style/components/hottopic.css";
+import ajax from '../ajax'
 const Hottopic = props => {
-  let [topicdata, setTopicdata] = useState(props.articList);
-  useEffect(() => {
-    let topData = topicdata;
-    if(topData.length ==0){
-      topData=JSON.parse(sessionStorage.getItem("articList"))
-    }
-    topData.sort((a, b) => {
-      return b.view_count - a.view_count;
-    });
-    
-    console.log('接受到的文章',topicdata);
-    
+  let [topicdata, setTopicdata] = useState(props.data);
+  useEffect( () => {
+    async function fetchdata (){
+      ajax('getHotArticleList').then(res => {
+        console.log(res.data,'rem')
+        setTopicdata(res.data.list)
+      });
 
-    setTopicdata(topData);
-  }, []);
+    }
+   
+      fetchdata()
+  },[]);
   return (
     <div className="hotTopic">
       <Divider>近期热门</Divider>
@@ -34,11 +32,21 @@ const Hottopic = props => {
               </a>
             ]}
           >
-            {item.title}
+            {<span className='hotitle'>{item.title}</span>}
           </List.Item>
         )}
       />
     </div>
   );
 };
+
+// Hottopic.getInitialProps = async () => {
+//   const promise = new Promise(resolve => {
+//     ajax('getHotArticleList').then(res => {
+//       resolve(res.data);
+//     });
+//   });
+
+//   return await promise;
+// };
 export default Hottopic;

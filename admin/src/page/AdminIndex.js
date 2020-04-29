@@ -3,6 +3,7 @@ import { Layout, Menu, Breadcrumb } from "antd";
 import "../static/style/AdminIndex.css";
 import ArticleList from "./ArticleList";
 import AddArticle from "./AddArticle";
+import Typelist from './Typelist'
 import {
   AppstoreOutlined,
   PlusCircleFilled,
@@ -16,17 +17,20 @@ const { SubMenu } = Menu;
 
 function AdminIndex(props) {
   const [collapsed, setCollapsed] = useState(false);
+  const [urlst,setUrl] = useState({
+    addArticle:'/index/add',
+    articleList:"/index/list",
+    typelist:'/index/Type'       
+  })
 
   const onCollapse = collapsed => {
     setCollapsed(collapsed);
   };
   const handleClickArticle = e => {
     console.log(e.item.props, e);
-    if (e.key == "addArticle") {
-      props.history.push("/index/add");
-    } else {
-      props.history.push("/index/list");
-    }
+    
+      props.history.push(urlst[e.key]);
+    
   };
 
   return (
@@ -52,6 +56,7 @@ function AdminIndex(props) {
             }
           >
             <Menu.Item key="addArticle">添加文章</Menu.Item>
+            <Menu.Item key="typelist">分类管理</Menu.Item>
             <Menu.Item key="articleList">文章列表</Menu.Item>
           </SubMenu>
 
@@ -75,6 +80,7 @@ function AdminIndex(props) {
                 <Route path="/index/add/" exact component={AddArticle} />
                 <Route path="/index/add/:id" exact component={AddArticle} />
                 <Route path="/index/list/"  exact  component={ArticleList} />
+                <Route path="/index/Type/"  exact  component={Typelist} />
               </Switch>
             </div>
           </div>

@@ -23,6 +23,22 @@ class MainController extends Controller {
     const resType = await this.app.mysql.select("type");
     this.ctx.body = { data: resType };
   }
+  async getNavList() {
+    // 获取导航信息
+    let sql = `SELECT * FROM nav_type`;
+    const results = await this.app.mysql.query(sql);
+    this.ctx.body = {
+      data: results
+    };
+  }
+  async getListTypeById (){
+    let id = this.ctx.params.id;
+    let sql =`select * from type where nav_id = ${id}`
+    const results = await this.app.mysql.query(sql);
+    this.ctx.body = {
+      data: results
+    };
+  }
   //添加文章
   async addArticle() {
     let tmpArticle = this.ctx.request.body;
@@ -82,7 +98,7 @@ class MainController extends Controller {
       "article.title as title," +
       "article.introduce as introduce," +
       "article.article_content as article_content," +
-      "FROM_UNIXTIME(article.addTime,'%Y-%m-%d' ) as addTime," +
+      "article.addTime as addTime," +
       "article.view_count as view_count ," +
       "type.typeName as typeName ," +
       "type.id as typeId " +

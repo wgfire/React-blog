@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
+import { Spin } from 'antd';
 import { Row, Col, List } from "antd";
 import Header from "../components/header";
 import "../public/style/page/index.css";
@@ -12,22 +13,25 @@ import ajax from "../ajax";
 import servicePath from "../config/apiUrl";
 const Home = list => {
   const [mylist, setMylist] = useState(list.data);
+  const[showT,setShowT]=useState(false)
   useEffect(() => {
-    let articList = JSON.stringify(list.data.slice(0,10));
-    sessionStorage.getItem("articList")
-      ? ""
-      : sessionStorage.setItem("articList", articList);
+    
+      setMylist(mylist)
+
   }, []);
   return (
     <Fragment>
+    
       <Head>
         <title>首页</title>
       </Head>
       <Header />
       <Row className="comm-main" type="flex" justify="center">
+     
         <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}>
+        
           <List
-            header={<div>最新日志</div>}
+            header={<div className='hdiv'> <span>日志数量{mylist.length}</span> <span onClick={()=>{setShowT(true)}} ><IconFont type='w-caidan' /></span></div>}
             itemLayout="vertical"
             dataSource={mylist}
             renderItem={item => (
@@ -60,9 +64,10 @@ const Home = list => {
           />
         </Col>
 
-        <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4} xxl={4}>
+        <Col className={["comm-right ",showT?"c-right":''].join(' ')} xs={0} sm={0} md={7} lg={5} xl={4} xxl={4}>
+          <IconFont type="w-guanbi"  onClick={()=>{setShowT(false)}} className='guanbi'/>
           <Author></Author>
-          <Hottopic articList={mylist.slice(0,10)}></Hottopic>
+          <Hottopic />
         </Col>
       </Row>
       <Footer></Footer>
@@ -74,7 +79,11 @@ Home.getInitialProps = async () => {
   const promise = new Promise(resolve => {
     ajax.get(servicePath.getArticleList).then(res => {
       //console.log('远程获取数据结果:',res.data.data)
-
+      res.data.data.sort((a,b)=>{
+        let time = new Date(a.addTime).getTime()
+        let time2 = new Date(b.addTime).getTime()
+        return time2-time
+      })
       resolve(res.data);
     });
   });

@@ -50,7 +50,7 @@ const Header = () => {
     };
     
     fetchData();
-    videoInit();
+   // videoInit();
   }, []);
   function videoInit(params) {
     let index = 0
@@ -82,7 +82,7 @@ const Header = () => {
     });
     video.addEventListener("canplay", function(e) {
       console.log("提示该视频已准备好开始播放");
-      video.play();
+    //  video.play();
     });
   }
   function handItemClick(props, item) {
@@ -96,14 +96,14 @@ const Header = () => {
   }
   return (
     <div className="header">
-      <Row justify="center">
+      <Row justify="space-around" style={{'flex-flow':'row nowrap','line-height': 42}}>
         <Col
-          xs={24}
-          sm={24}
+          xs={9}
+          sm={8}
           md={10}
           lg={10}
           xl={10}
-          style={{ position: "relative" }}
+          style={{ position: "relative", 'padding-left': 5,'box-sizing': 'border-box'}}
         >
           {leftContent.map((item, index) => {
             return (
@@ -112,20 +112,15 @@ const Header = () => {
               </span>
             );
           })}
-          <div className="music">
-            {/* <iframe
-              border="0"
-              width="330"
-              height="76"
-              src="//music.163.com/outchain/player?type=2&id=474547446&auto=1&height=66"
-            /> */}
-            <video controls autoPlay={true} name="media" id="video">
+          {/* <div className="music">
+            
+            <video controls  name="media" id="video">
               <source src={source[index]} type="audio/mp4"></source>
             </video>
-          </div>
+          </div> */}
         </Col>
 
-        <Col className="memu-div" xs={0} sm={0} md={14} lg={8} xl={6}>
+        <Col className="memu-div" xs={15} sm={16} md={14} lg={8} xl={6}>
           <Menu mode="horizontal">
             {navArray.map((item, index) => {
               if (item.children.length > 0) {

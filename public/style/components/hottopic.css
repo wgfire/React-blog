@@ -4,3 +4,10 @@
 .hottext {
   color: #2d8cf0;
 }
+.hotitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  max-width: 140px;
+}

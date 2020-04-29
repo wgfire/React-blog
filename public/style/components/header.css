@@ -33,3 +33,7 @@
 .music iframe {
   border: none;
 }
+
+@media screen and (max-width: 700px) {
+
+}

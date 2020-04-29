@@ -85,6 +85,13 @@ class HomeController extends Controller {
       };
     }
   }
+  async getHotArticleList() {
+    let sql =
+      "SELECT  * FROM article ORDER BY view_count DESC LIMIT 10 ";
+    const resList = await this.app.mysql.query(sql);
+    console.log('热门文章数',resList.length)
+    this.ctx.body = { list: resList };
+  }
 }
 
 module.exports = HomeController;

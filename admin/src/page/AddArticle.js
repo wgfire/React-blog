@@ -3,8 +3,9 @@ import marked from "marked";
 import ajax from "../ajax";
 import servicePath from "../config/apiUrl";
 import "../static/style/AddArticle.css";
+import locale from 'antd/es/date-picker/locale/zh_CN';
 import { Row, Col, Input, Select, Button, DatePicker, message } from "antd";
-
+import moment from 'moment';
 const { Option } = Select;
 const { TextArea } = Input;
 
@@ -14,7 +15,7 @@ function AddArticle(props) {
     //获得文章ID
     let tmpId = props.match.params.id;
     if (tmpId) {
-      setArticleId(tmpId);
+      setArticleId(parseInt(tmpId) );
       getArticleById(tmpId);
     }
   }, []);
@@ -64,6 +65,7 @@ function AddArticle(props) {
       header: { "Access-Control-Allow-Origin": "*" }
     }).then(res => {
       //let articleInfo= res.data.data[0]
+      console.log(res,'文章详情')
       setArticleTitle(res.data.data[0].title);
       setArticleContent(res.data.data[0].article_content);
       let html = marked(res.data.data[0].article_content);
@@ -74,8 +76,19 @@ function AddArticle(props) {
       setShowDate(res.data.data[0].addTime);
       setSelectType(res.data.data[0].typeId);
       setViewCount(res.data.data[0].view_count);
+     
     });
   };
+  function tonullArticle(){
+    setArticleTitle('')
+    setArticleContent('')
+    setArticleId(0)
+    setMarkdownContent('')
+    setIntroducehtml('')
+    setIntroducemd('')
+    setShowDate('')
+
+  }
 
   //保存文章的方法
   const saveArticle = () => {
@@ -103,16 +116,21 @@ function AddArticle(props) {
     dataProps.title = articleTitle;
     dataProps.article_content = articleContent;
     dataProps.introduce = introducemd;
-    let getHours = new Date().getHours();
-    let minute = new Date().getMinutes();
-    let sencd = new Date().getSeconds();
-    dataProps.addTime = showDate + " " + getHours + ":" + minute + ":" + sencd;
+   
 
-    console.log("发布", dataProps);
+   
 
     if (articleId == 0) {
       dataProps.view_count = Math.ceil(Math.random() * 10) + 10;
       setViewCount(dataProps.view_count);
+      let getHours = new Date().getHours();
+      let minute = new Date().getMinutes();
+      let sencd = new Date().getSeconds();
+      if(sencd<10){
+        sencd = '0'+sencd
+      }
+      dataProps.addTime = showDate + ":" + getHours + ":" + minute + ":" + sencd;
+      console.log("发布", dataProps);
       ajax({
         method: "post",
         url: servicePath.addArticle,
@@ -154,6 +172,7 @@ function AddArticle(props) {
               <Input
                 placeholder="博客标题"
                 size="small"
+                value={articleTitle}
                 onChange={e => {
                   setArticleTitle(e.target.value);
                 }}
@@ -199,7 +218,10 @@ function AddArticle(props) {
 
         <Col span={6}>
           <Row>
-            <Col span={24} offset={5}>
+            <Col span={24} offset={1}>
+            <Button type="primary" size="small" onClick={tonullArticle}>
+                清空文章
+              </Button>
               <Button size="small" onClick={saveArticle}>
                 暂存文章
               </Button>
@@ -207,12 +229,16 @@ function AddArticle(props) {
               <Button type="primary" size="small" onClick={saveArticle}>
                 发布文章
               </Button>
+              
               &nbsp;
               <DatePicker
+              locale={locale}
+             
                 onChange={(date, dateString) => setShowDate(dateString)}
                 placeholder="发布日期"
                 size="small"
               />
+              
             </Col>
           </Row>
           <br />

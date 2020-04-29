@@ -35,6 +35,9 @@ html {
   background-color: #fff;
   margin-left: 0.5rem;
   padding: 0.3rem;
+  min-height: 85vh;
+  max-height: 85vh;
+  overflow: auto;
   border-radius: 0.3rem;
   border-bottom: 1px solid #eee;
 }
@@ -86,4 +89,50 @@ a {
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
   background: #ededed;
   border-radius: 10px;
+}
+
+
+@media screen and (max-width: 700px) { /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
+  .hdiv svg  {
+     display: block !important;
+   }          
+}
+@media screen and (max-width: 700px) { /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
+  .c-right {
+     display: block !important;
+     position: absolute;
+     right: 5px;
+     width: 60vw;
+     box-shadow: -3px 2px 4px 0px #bcdaef;
+     animation: sacl 0.5s cubic-bezier(0.21, -0.01, 0.39, 1.21) ;
+     transform:scale(1)!important;
+     transform-origin: 100% 0%;
+   }
+   .comm-right {
+     display: block !important;
+     transform:scale(0);
+     transform-origin: 100% 0%;
+     transition: transform 0.5s cubic-bezier(0.48, 0.43, 0.29, 1.1);
+     position: absolute;
+     right: 5px;
+     width: 60vw;
+     box-shadow: -3px 2px 4px 0px #bcdaef;
+
+   }      
+   .guanbi {
+     display: inline-block !important;
+   }
+}
+.guanbi {
+  display: none;
+}
+@keyframes sacl {
+  from {
+    
+    transform: scale(0);
+  }
+
+  to {
+    transform:  scale(1);
+  }
 }

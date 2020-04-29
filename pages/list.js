@@ -73,7 +73,7 @@ const wList = data => {
                     <IconFont type={item.typeIcon} /> {item.typeName}
                   </Col>
                   <Col>
-                    <IconFont type="w-zongrenshu" /> {item.view_count + "人"}
+                    <IconFont type="w-zongrenshu" /> {item.view_count + "阅读"}
                   </Col>
                 </Row>
                 <div className="list-context">{item.introduce}</div>
@@ -100,7 +100,7 @@ const wList = data => {
               );
             })}
           </div>
-          <HotTopic articList={artic} />
+          <HotTopic  />
         </Col>
       </Row>
       <Footer></Footer>
